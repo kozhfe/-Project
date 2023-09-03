@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Core;
-using twoChapter.Services;
+using twoChapter.IServices;
+using AutoMapper;
+using twoChapter.Dtos;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,11 +17,14 @@ namespace twoChapter.Controllers
     public class TestAPIController : ControllerBase
     { 
         public static IEnumerable<ITouristRouteRepository> _ap;
-        public TestAPIController(IEnumerable<ITouristRouteRepository> ap)
+
+        private readonly IMapper _mapper;
+
+        public TestAPIController(IEnumerable<ITouristRouteRepository> ap, IMapper mapper)
         {
             _ap = ap;
+            _mapper = mapper;
         }
-        // GET: api/<TestAPI2Controller>
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -27,11 +32,14 @@ namespace twoChapter.Controllers
         }
 
         // GET api/<TestAPI2Controller>/5
-        [HttpGet("{idqwe}")]
-        public IActionResult Get123(Guid id)
+        [HttpGet("{TouristRouteId}")]
+        public IActionResult Get(Guid TouristRouteId)
         {
-            var lst = _ap.ToList().FirstOrDefault().GetTouristRoute(id);
-            return Ok(lst);
+            var lst = _ap.ToList().FirstOrDefault().GetTouristRoute(TouristRouteId);
+
+            var todot = _mapper.Map<TouristRouteDto>(lst);
+
+            return Ok(todot);
         }
 
         // POST api/<TestAPI2Controller>

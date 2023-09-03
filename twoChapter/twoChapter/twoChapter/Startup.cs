@@ -11,6 +11,8 @@ using twoChapter.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;//获取appsettings中配置文件对象
 using twoChapter.Services;
+using twoChapter.IServices;
+using AutoMapper;
 
 namespace twoChapter
 {
@@ -24,16 +26,20 @@ namespace twoChapter
         
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        //系统IOC容器
         public void ConfigureServices(IServiceCollection services)//可以注入各种组件服务的依赖（运行时调用）
         {
             services.AddMvc();//注入控制器组件
-            services.AddTransient<ITouristRouteRepository, TouristRouteRepository>();
-            services.AddTransient<ITouristRouteRepository, TouristRouteRepository1>();
+           
+            services.AddTransient<ITouristRouteRepository, TouristRouteRepository>();//注册服务
+            
             services.AddDbContext<AppDbContext>(option=>
             {
-                //option.UseSqlServer(@"server=localhost; Database=FakeXichengDb; User Id=sa; Password=123456;");
                 option.UseSqlServer(Configuration["DbContext:ConnectionString"]);
             });//注入数据库链接器,option配置链接数据库
+
+            //自动扫描程序集里包含映射关系的profile文件，自动加载  （自动寻找项目中的Profiles文件）
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());//实体映射
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -29,6 +29,10 @@ namespace twoChapter.Database
                 Description = "shuoming",
                 CreateTime = DateTime.UtcNow
             });//提供数据支持
+
+            //删除表操作
+            //modelBuilder.Ignore<>();
+
             base.OnModelCreating(modelBuilder); 
         }
     }

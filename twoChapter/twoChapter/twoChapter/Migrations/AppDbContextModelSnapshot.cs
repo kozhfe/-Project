@@ -64,8 +64,8 @@ namespace twoChapter.Migrations
                     b.HasData(
                         new
                         {
-                            id = new Guid("7411f8ee-ef30-479a-b89b-0472a042c514"),
-                            CreateTime = new DateTime(2023, 6, 15, 2, 48, 59, 872, DateTimeKind.Utc).AddTicks(2662),
+                            id = new Guid("aded5717-6a83-4965-945d-033135ccc43c"),
+                            CreateTime = new DateTime(2023, 9, 1, 12, 21, 30, 682, DateTimeKind.Utc).AddTicks(890),
                             Description = "shuoming",
                             OriginalPrice = 0m,
                             Title = "ceshititle"
