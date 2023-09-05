@@ -11,5 +11,9 @@ namespace twoChapter.IServices
         //数据仓库提供方法
         IEnumerable<TouristRoute> GetTouristRoutes();
         TouristRoute GetTouristRoute(Guid touristRouteId);
+
+        bool TouristRouteExists(Guid touristrouteid);
+        IEnumerable<TouristRoutePicture> GetPicturesByTouristRouteId(Guid touristRouteId);
+        public TouristRoute GetPicturesList(Guid touristRouteId);
     }
 }

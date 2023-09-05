@@ -31,7 +31,6 @@ namespace twoChapter.Dtos
         /// <summary>
         /// 外键
         /// </summary>
-        public ICollection<TouristRoutePicture> TouristRoutePictures { get; set; }
-        = new List<TouristRoutePicture>();
+        public ICollection<TouristRoutePictureDto> TouristRoutePictures { get; set; }
     }
 }
