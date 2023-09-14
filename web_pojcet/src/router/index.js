@@ -1,27 +1,23 @@
 
-import Vue from 'vue' //引入Vue包
-import Router from 'vue-router' //引入router包
+import { createRouter, createWebHashHistory }  from 'vue-router' //引入router包
 
 
-import HomeView from '../components/CheShi.vue' //引入需要加载的组件模
+const Home = () => import("@/components/CheShi.vue");
 
 
-Vue.use(Router)//进行调用
+// 2. 定义一些路由
+// 每个路由都需要映射到一个组件。
+// 我们后面再讨论嵌套路由。
+const routes = [{ path: "/", component: Home }];
 
-
-// 创建router实例 传routes配置  routes配置为我们定义的路由
-const router = new Router({
-    mode: 'history',
-    routers:[{
-        path:"/", //地址
-        //name:'home',//命名
-        component: HomeView  //加载的模块
-    },{
-        path:"/", //地址
-        name:'home',//命名
-        component: HomeView  //加载的模块
-    }]
-  })
+// 3. 创建路由实例并传递 `routes` 配置
+// 你可以在这里输入更多的配置，但我们在这里
+// 暂时保持简单
+const router = createRouter({
+    // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
+    history: createWebHashHistory(),
+    routes // `routes: routes` 的缩写
+});
 //  进行输入
   export default router
 
