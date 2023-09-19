@@ -2,7 +2,7 @@
 import { createRouter, createWebHashHistory }  from 'vue-router' //引入router包
 
 
-const Home = () => import("@/components/CheShi.vue");
+const Home = () => import("@/components/LoginPage.Vue");
 
 
 // 2. 定义一些路由
