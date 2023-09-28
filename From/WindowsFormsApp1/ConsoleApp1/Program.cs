@@ -10,99 +10,58 @@ using System.IO;
 namespace ConsoleApp1
 {
     using ConsoleApp1.Redis;
+    using ConsoleApp1.验证码;
+    using ServiceStack.ServiceInterface.ServiceModel;
+    using System.Reflection;
 
     class Program
     {
         static void Main(string[] args)
         {
-            // Redis.Redis.SetRedis();
+            ces ces1 = new ces();
+            ces1.cw1 =  1;
+            ces1.cw2 = "2";
+            ces1.cw3 = "3";
+            ces1.cw4 = "4";
 
-            List<string> lst = new List<string> { "MO2307123728-3",
-                "MO2308053995-3",
-                "MO2307293938-3",
-                "MO2307293938_1-3",
-                "MO2308013942_1-3",
-                "MO2308013942_3-3",
-                "MO2308124229-3",
-                "MO2308124230-3",
-                "MO2308124228-3",
-                "MO2308013942_2-3",
-                "MO2308194321-3",
-                "MO2308013942-3",
-                "MO2307283932_2-1",
-                "MO2307263867-5",
-                "MO2307263874_1-3",
-                "MO2307263869_1-2",
-                "MO2307103594_1-1",
-                "MO2307263861-4",
-                "MO2308053998-6",
-                "MO2308053968-6",
-                "MO2307263873_1-5",
-                "MO2307053495-1",
-                "MO2308074000-1",
-                "MO2307263865_1-1",
-                "MO2307263876_2-1",
-                "MO2307263876_3-1",
-                "MO2307263876-1",
-                "MO2308084023-1",
-                "MO2308084027-2",
-                "MO2308084026-2",
-                "MO2308084024-1",
-                "MO2308084022-1",
-                "MO2307103623-6",
-                "MO2307103620_2-7",
-                "MO2307103620_3-7",
-                "MO2307243846_2-14",
-                "MO2307263864_2-4",
-                "MO2307263864-4",
-                "MO2307223829_1-2",
-                "MO2307123736_4-2",
-                "MO2307123736-2",
-                "MO2307263862-4",
-                "MO2307243844-1",
-                "MO2307263868_2-1",
-                "MO2307263868_1-1",
-                "MO2307263868_3-1",
-                "MO2307263868_4-1",
-                "MO2307103620_4-7",
-                "MO2307263871-1",
-                "MO2307223837_1-1",
-                "MO2307223837_3-1",
-                "MO2307223837_4-1",
-                "MO2307223837-1",
-                "MO2307223838_27-1",
-                "MO2307273890_1-1",
-                "MO2307243847-1",
-                "MO2307293935-1",
-                "MO2308074002-1",
-                "MO2307243847_1-1",
-                "MO2307243847_7-1",
-                "MO2307243847_8-1",
-                "MO2307223838_11-1",
-                "MO2307223838_12-1",
-                "MO2307223838_13-1",
-                "MO2307223838_16-1",
-                "MO2307263872_1-12",
-                "MO2307263877_7-11",
-                "MO2308074001-12",
-                "MO2307263877_6-11",
-                "MO2305132901_1-13",
-                "MO2307223839_3-1",
-                "MO2307223839_11-1",
-                "MO2307223839_2-1",
-                "MO2307223839_1-1",
-                "MO2307223839_6-1",
-                "MO2307223838_23-1",
-                "MO2307223838_9-1",
-                "MO2307223838_41-1",
-                "MO2307223838_32-1",
-                "MO2305112820_20-11",
-                "MO2305112820_21-11" };
 
-            Console.WriteLine(lst.Exists(t=>t== "MO2307223839_6-1"));
+            ces ces2 = new ces();
+            ces2.cw1 = 1;
+            ces2.cw2 = "2";
+            ces2.cw3 = "4";
+            ces2.cw4 = "4";
+
+
+            Type objectType = typeof(ces);
+            PropertyInfo[] properties = objectType.GetProperties();
+            foreach (PropertyInfo property in properties)
+            {
+                object propertyValue1 = property.GetValue(ces1);
+                object propertyValue2 = property.GetValue(ces2);
+                if (!Equals(propertyValue1, propertyValue2))
+                {
+                    string propertyName = property.Name;
+                    Console.WriteLine("Property {0} is different.", propertyName);
+                    Console.WriteLine("Value in ces1: {0}", propertyValue1);
+                    Console.WriteLine("Value in ces2: {0}", propertyValue2);
+                    Console.WriteLine("--------------------------");
+                }
+            }
+
+            ImageVerificationCode class1 = new ImageVerificationCode(100,100);
+
+            Console.WriteLine(class1.CreateVerificationImage("测试"));
 
             Console.ReadLine();
         }
+    }
+
+    class ces
+    {
+        public int cw1 { get; set; }
+        public string cw2 { get; set; }
+        public string cw3 { get; set; }
+        public string cw4 { get; set; }
     }
 }
 

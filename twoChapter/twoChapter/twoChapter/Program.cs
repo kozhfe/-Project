@@ -14,6 +14,7 @@ namespace twoChapter
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();//创建并运行虚拟托管服务器
+            System.AppContext.SetSwitch("System.Drawing.EnableUnixSupport", true);
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -32,6 +32,8 @@ namespace twoChapter
             services.AddMvc();//注入控制器组件
            
             services.AddTransient<ITouristRouteRepository, TouristRouteRepository>();//注册服务
+            services.AddTransient<ILogOnRepository, LogOnServer>();//注册服务
+
             
             services.AddDbContext<AppDbContext>(option=>
             {
@@ -40,6 +42,7 @@ namespace twoChapter
 
             //自动扫描程序集里包含映射关系的profile文件，自动加载  （自动寻找项目中的Profiles文件）
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());//实体映射
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +54,13 @@ namespace twoChapter
             }
 
             app.UseRouting();
+
+            app.UseCors(corsConfig =>
+            {
+                //允许所有域名
+                corsConfig.AllowAnyOrigin();
+            });
+
 
             app.UseEndpoints(endpoints =>
             {
